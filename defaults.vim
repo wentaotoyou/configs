@@ -132,3 +132,4 @@ set autoindent
 imap jj <esc>
 map <F5> :AsyncRun python %<CR>:copen 20<CR>
 map <F6> :AsyncRun sh %<CR>:copen 20<CR>
+set expandtab
