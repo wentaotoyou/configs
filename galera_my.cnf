@@ -1,0 +1,36 @@
+[mysqld]
+user=mysql
+datadir=/hrb_data/mysql/data
+log-error=/hrb_data/mysql/logs/error.log-error
+slow_query_log=1
+long_query_time = 5
+slow_query_log_file = /mysql_data/logs/slow.log
+
+innodb_buffer_pool_size=5G
+innodb_open_files=65535
+#innodb_thread_concurrency = 0
+innodb_log_files_in_group = 3
+innodb_file_per_table = 1
+transaction_isolation = REPEATABLE-READ
+
+open_files_limit = 65535
+back_log = 600 
+max_connections = 1500
+max_connect_errors = 6500
+skip_external_locking
+skip_name_resolve
+character-set-server = utf8
+
+binlog_format=ROW
+#bind-address=0.0.0.0
+default_storage_engine=innodb
+innodb_autoinc_lock_mode=2
+innodb_flush_log_at_trx_commit=0
+
+wsrep_provider=/usr/lib64/libgalera_smm.so
+wsrep_provider_options="gcache.size=1G; gcache.page_size=300M"
+wsrep_cluster_name="my_galera_cluster"
+wsrep_cluster_address="gcomm://IP.node1,IP.node2,IP.node3"
+wsrep_sst_method=rsync
+#wsrep_notify_cmd=
+
