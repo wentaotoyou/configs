@@ -27,6 +27,7 @@ default_storage_engine=innodb
 innodb_autoinc_lock_mode=2
 innodb_flush_log_at_trx_commit=0
 
+wsrep_on=ON
 wsrep_provider=/usr/lib64/libgalera_smm.so
 wsrep_provider_options="gcache.size=1G; gcache.page_size=300M"
 wsrep_cluster_name="my_galera_cluster"
