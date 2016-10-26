@@ -1,11 +1,21 @@
 [maxscale]
-threads=1
+threads=4
 libdir= /usr/local/maxscale/lib64/maxscale/
 logdir=/data/maxscale/logs/
 datadir=/data/maxscale/data
 cachedir=/data/maxscale/cache
-##language=/usr/local/maxscale/lib/maxscale/
-piddir=/data/maxscale/data
+#language=/usr/local/maxscale/lib/maxscale/
+#piddir=/data/maxscale/data
+
+[CLI]
+type=service
+router=cli
+
+[CLI Listener]
+type=listener
+service=CLI
+protocol=maxscaled
+socket=default
 
 [MySQL Monitor]
 type=monitor
@@ -14,28 +24,15 @@ servers=server1,server2,server3
 user=maxscale
 passwd=realc.
 monitor_interval=10000
+disable_master_failback=true
 
 [RW Split Router]
 type=service
 router=readwritesplit
-servers=server1,server2
+servers=server1,server2,server3
 user=maxscale
 passwd=realc.
 max_slave_connections=100%
-
-[Read Connection Router]
-type=service
-router=readconnroute
-router_options=master
-servers=server1
-user=maxscale
-passwd=realc.
-
-#[Read Connection Listener]
-#type=listener
-#service=Read Connection Router
-#protocol=MySQLClient
-#port=4008
 
 [RW Split Listener]
 type=listener
